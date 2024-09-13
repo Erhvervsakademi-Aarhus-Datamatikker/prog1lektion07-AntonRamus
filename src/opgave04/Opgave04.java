@@ -3,12 +3,27 @@ package opgave04;
 public class Opgave04 {
     public static void main(String[] args) {
         char[] romanNumber = {'M', 'L', 'X', 'I'}; //1061
-        System.out.println(romanNumberToArabicNumber(romanNumber));
+        char[] romanNumber2 = {'C','M','X','L','I','V'};
+        System.out.println(romanNumberToArabicNumber(romanNumber2));
     }
 
     private static int romanNumberToArabicNumber(char[] romanNumber) {
-        //Din implementering her.
-        return 0;
+        int sumOfRomanNumber = 0;
+        int arabicTemp = 0;
+        int[] arabicNumbers = new int[romanNumber.length];
+        for (int charIndex = 0; charIndex < romanNumber.length; charIndex++){
+            arabicNumbers[charIndex] = SingleRomanNumberToArabicNumber(romanNumber[charIndex]);
+        }
+        for (int numberIndex = (romanNumber.length - 1); numberIndex >= 0; numberIndex--){
+            if (arabicNumbers[numberIndex] < arabicTemp){
+                sumOfRomanNumber -= arabicNumbers[numberIndex];
+            } else {
+                sumOfRomanNumber += arabicNumbers[numberIndex];
+            }
+            arabicTemp = arabicNumbers[numberIndex];
+        }
+
+        return sumOfRomanNumber;
     }
 
     private static int SingleRomanNumberToArabicNumber(char roman) {
